@@ -1,0 +1,88 @@
+
+<FirstNavItem>
+    theme_text_color: 'Custom'
+    divider: None
+    on_press: self.callback() 
+
+    IconLeftWidget:
+        icon: root.icon
+
+
+
+<SecondNavItem>
+    theme_text_color: 'Custom'
+    divider: None
+    on_press: self.callback() 
+
+    IconLeftWidget:
+        icon: root.icon
+
+
+
+
+
+
+<ContentNavigationDrawer>
+
+    BoxLayout:
+        orientation: 'vertical'
+    
+
+        FloatLayout:
+            size_hint_y: None
+            height: "200dp"
+
+            canvas:
+                Color:
+                    rgba: app.theme_cls.primary_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            BoxLayout:
+                id: top_box
+                size_hint_y: None
+                height: "200dp"
+                #padding: "10dp"
+                x: root.parent.x
+                pos_hint: {"top": 1}
+
+            MDIconButton:
+                icon: "close"
+                x: root.parent.x + dp(10)
+                pos_hint: {"top": 1}
+                on_release: root.parent.set_state('toggle')
+
+
+        ScrollView:
+            pos_hint: {"top": 1}
+
+            GridLayout:
+                id: box_item
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+
+
+BoxLayout:
+    BoxLayout:
+        orientation: 'vertical'
+    
+        MDToolbar:
+            id: main_toolbar
+            title: "Home"
+            md_bg_color: app.theme_cls.primary_color 
+            theme_text_color: "Primary"
+            left_action_items: [['menu', lambda x: app.root.ids.nav_drawer.set_state('toggle')]]
+
+        NavigationLayout:
+
+            ScreenManager:
+                id: MainScreenManager
+
+
+            MDNavigationDrawer:
+                id: nav_drawer
+
+                ContentNavigationDrawer:
+                    id: content_drawer
